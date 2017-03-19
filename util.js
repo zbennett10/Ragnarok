@@ -25,5 +25,3 @@
 })({});
 
 
-Rok.log(true, "poop", "sauce", "poop");
-
