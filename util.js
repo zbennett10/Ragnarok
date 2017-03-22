@@ -48,6 +48,11 @@
         return output;
     }
 
+    //takes an array of promises and the nmber of promoises you would like resolved before breaking out and ignoring all other promises
+    exports.resolveSet = function(max, promises) {
+        
+    }
+
     //date helpers-----------------------------------
     exports.dateFromISO = function(isoString) {
         if(exports.getType(isoString) === 'date') return isoString;
