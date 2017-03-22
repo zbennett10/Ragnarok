@@ -1,7 +1,3 @@
-//create an IIFE that returns an object with an api that fetches util methods located on the prototype of the base object
-
-//use this config to test function in node
-//modify this IIFE to recieve the window global and attach Ragnarok to window.document
 (function(exports){
 
     exports.log = function(split, ...args) {
@@ -37,27 +33,30 @@
         array[index] = value;
     }
 
-    //still working on this
-    exports.mutableZip = function(left, right) {
-        let larger, smaller;
-        if(left.length >= right.length) {
-            larger = left;
-            smaller = right;
-        } else {
-            larger = right;
-            smaller = left;
+    //zips the right onto the left
+    //fix this
+    exports.zip = function(left, right) {
+        const output = [];
+        const newLeft = left.slice();
+        const newRight = right.slice();
+        while(newRight.length > 0) {
+            if(newLeft.shift() !== undefined) output.push(newLeft.shift());
+            output.push(newRight.shift());
         }
-        larger.forEach((value, index, array) => {
-                exports.mutableInsert(array, index, smaller[index]);
-            });
-        return larger;
+        if(newLeft.length > 0) return output.concat(newLeft.slice());
+        return output;
+    }
+
+    //date helpers-----------------------------------
+    exports.dateFromISO = function(isoString) {
+        return new Date(...isoString.split(/\D+/));
     }
 
     Rok = exports;
 
 })({});
 
-console.log(Rok.mutableZip([1,3,5], [2,4]));
-
-
+// const arr1 = [1,3];
+// const arr2 = [2,4,5,6];
+// console.log(Rok.zip(arr1, arr2));
 
