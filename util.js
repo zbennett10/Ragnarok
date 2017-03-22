@@ -12,6 +12,7 @@
     exports.getType = function(value) {
         if(typeof value === 'object') {
             if(value.length !== undefined) return 'array';
+            if(typeof value.getTime === 'function') return 'date';
         }
         return typeof value;
     }
@@ -59,4 +60,6 @@
 // const arr1 = [1,3];
 // const arr2 = [2,4,5,6];
 // console.log(Rok.zip(arr1, arr2));
+
+console.log(Rok.getType(new Date()));
 
