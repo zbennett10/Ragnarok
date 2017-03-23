@@ -13,6 +13,7 @@
         if(typeof value === 'object') {
             if(value.length !== undefined) return 'array';
             if(typeof value.getTime === 'function') return 'date';
+            if(typeof value.catch === 'function' && typeof value.then === 'function') return 'promise';
         }
         return typeof value;
     }
