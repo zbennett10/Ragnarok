@@ -48,9 +48,22 @@
         return output;
     }
 
-    //takes an array of promises and the nmber of promoises you would like resolved before breaking out and ignoring all other promises
-    exports.resolveSet = function(max, promises) {
-        
+    //takes an array of promises and the nmber of promises you would like resolved before breaking out and ignoring all other promises
+    //fix to where if limit is equal to the total promise count, promise results are returned in original order
+    exports.resolveLimit = function(limit, promises) {
+        if(limit > promises.length) limit = promises.length;
+        const resolved = [];
+        return new Promise(function(resolve, reject) {
+            promises.forEach((promise, index) => {
+                promise.then(result => {
+                    resolved.push(result);
+
+                    if(--limit === 0) {
+                        resolve(resolved);
+                    }
+                });
+            });
+        });
     }
 
     //date helpers-----------------------------------
